@@ -12,7 +12,7 @@ const Login = () => {
     <div className="login-container">
       <h1 className="login-header">Sign in</h1>
       <div className="login-form">
-        <div class="input">
+        <div className="input">
           <input
             type="email"
             placeholder="Email"
@@ -45,7 +45,7 @@ const Login = () => {
             <FaLock className={showPass ? "icon" : "disabled"} />
           </span>
         </div>
-        <button class="sign-in-btn">
+        <button class="btn-transition1 sign-in-btn">
           <span class="text">Sign in</span>
         </button>
         <p className="separator">

@@ -1,9 +1,7 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Navbar({ isAuth, setIsAuth }) {
-  let nav = useNavigate();
-
   return (
     <div>
       <nav>

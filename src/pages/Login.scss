@@ -8,13 +8,6 @@
   justify-content: center;
 }
 
-.login-header {
-  font-weight: normal;
-  margin: 10px 0;
-
-  color: darken(#ededed, 50%);
-}
-
 .login-form {
   min-width: 300px;
 }
@@ -68,7 +61,6 @@
   padding: 10px 0;
 
   position: relative;
-  text-align: center;
 
   transition: opacity 300ms cubic-bezier(0.694, 0, 0.335, 1),
     background-color 100ms cubic-bezier(0.694, 0, 0.335, 1),
