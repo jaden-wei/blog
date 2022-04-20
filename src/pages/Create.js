@@ -5,14 +5,22 @@ import "draft-js/dist/Draft.css";
 import "./Create.scss";
 
 import Toolbar from "../components/Toolbar";
+import { RichUtils } from "draft-js";
+import { Modifier } from "draft-js";
+import getDefaultKeyBinding from "draft-js/lib/getDefaultKeyBinding";
+// import { Modifier } from "draft-js";
 
 const styleMap = {
   CODE: {
-    backgroundColor: "lightgray",
+    backgroundColor: "#cfcfcf",
     fontSize: "12px",
+    fontWeight: "200",
+    fontFamily: "`Source Code Pro`, monospace",
     display: "block",
-    padding: "5px",
+    padding: "2px",
     textIndent: "10px",
+
+    whiteSpace: "pre-wrap",
   },
 };
 
@@ -27,13 +35,36 @@ export default function Create() {
     editor.current.focus();
   }
 
-  // const handleSubmit = () => {
-  //   const rawContent = JSON.stringify(
-  //     convertToRaw(this.state.editorState.getCurrentContent())
-  //   );
+  const handlePastedText = (text, html) => {
+    console.log("handlePastedText executed");
+    const newState = Modifier.replaceText(
+      editorState.getCurrentContent(),
+      editorState.getSelection(),
+      text.trim()
+    );
 
-  //   // store raw content to db
-  // };
+    setEditorState(EditorState.createWithContent(newState));
+
+    console.log(editorState);
+    return true;
+  };
+
+  const keyBindingFn = (e) => {
+    if (e.keyCode === 9) {
+      setEditorState(RichUtils.onTab(e, editorState, 6));
+      return "tab";
+    }
+    return getDefaultKeyBinding(e);
+  };
+
+  const handleKeyCommand = (command) => {
+    if (command === "tab") {
+      // setEditorState(RichUtils.onTab(command, editorState, 6));
+      return;
+    }
+
+    setEditorState(RichUtils.handleKeyCommand(editorState, command));
+  };
 
   return (
     <div className="create-page-container">
@@ -41,15 +72,16 @@ export default function Create() {
         <h1 className="create-header">Create Post</h1>
         <input className="title-input" placeholder="Title..." />
         <div className="editor" onClick={focusEditor}>
-          {/* <div className="toolbar-container"> */}
           <Toolbar editorState={editorState} setEditorState={setEditorState} />
-          {/* </div> */}
           <Editor
             ref={editor}
             editorState={editorState}
             onChange={setEditorState}
             placeholder="Type out your post here..."
+            keyBindingFn={keyBindingFn}
+            handleKeyCommand={handleKeyCommand}
             customStyleMap={styleMap}
+            handlePastedText={handlePastedText}
           />
         </div>
         <button className="submit-btn">
