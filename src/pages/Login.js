@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Login.scss";
 
 import { useNavigate } from "react-router-dom";
@@ -9,12 +9,17 @@ import { signInWithPopup } from "firebase/auth";
 import { FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
-const Login = ({ setIsAuth }) => {
+const Login = ({ isAuth, setIsAuth }) => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuth) navigate("/");
+  }, []);
 
   const [showEmail, setShowEmail] = useState(true);
   const [showPass, setShowPass] = useState(true);
 
+  // firebase google sign in
   const signInWithGoogle = () => {
     signInWithPopup(auth, provider).then((result) => {
       localStorage.setItem("isAuth", true);
@@ -44,7 +49,7 @@ const Login = ({ setIsAuth }) => {
           </span>
         </div>
 
-        <div class="input">
+        <div className="input">
           <input
             type="password"
             placeholder="Password"
@@ -60,8 +65,8 @@ const Login = ({ setIsAuth }) => {
             <FaLock className={showPass ? "icon" : "disabled"} />
           </span>
         </div>
-        <button class="btn-transition1 sign-in-btn">
-          <span class="text">Sign in</span>
+        <button className="btn-transition1 sign-in-btn">
+          <span className="text">Sign in</span>
         </button>
         <p className="separator">
           <span>OR</span>

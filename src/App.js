@@ -14,7 +14,10 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<BlogList isAuth={isAuth} />} />
-          <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
+          <Route
+            path="/login"
+            element={<Login isAuth={isAuth} setIsAuth={setIsAuth} />}
+          />
           <Route path="/create" element={<Create />} />
         </Routes>
       </Router>
