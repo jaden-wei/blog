@@ -1,12 +1,27 @@
 import React, { useState } from "react";
 import "./Login.scss";
 
+import { useNavigate } from "react-router-dom";
+
+import { auth, provider } from "../Firebase";
+import { signInWithPopup } from "firebase/auth";
+
 import { FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
-const Login = () => {
+const Login = ({ setIsAuth }) => {
+  const navigate = useNavigate();
+
   const [showEmail, setShowEmail] = useState(true);
   const [showPass, setShowPass] = useState(true);
+
+  const signInWithGoogle = () => {
+    signInWithPopup(auth, provider).then((result) => {
+      localStorage.setItem("isAuth", true);
+      setIsAuth(true);
+      navigate("/");
+    });
+  };
 
   return (
     <div className="login-container">
