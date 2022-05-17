@@ -8,6 +8,7 @@ import BlogList from "./pages/BlogList";
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
+  const [user, setUser] = useState(null);
 
   return (
     <div className="App">
