@@ -66,7 +66,9 @@ const Login = ({ setIsAuth }) => {
         <p className="separator">
           <span>OR</span>
         </p>
-        <button className="login-with-google-btn">Sign in with Google</button>
+        <button className="login-with-google-btn" onClick={signInWithGoogle}>
+          Sign in with Google
+        </button>
       </div>
     </div>
   );
