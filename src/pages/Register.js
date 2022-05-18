@@ -1,25 +1,31 @@
 import React, { useEffect, useState } from "react";
-import "./Login.scss";
+import "./Register.scss";
 
 // icons
-import { FaLock } from "react-icons/fa";
+import { FaLock, FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useHistory } from "react-router-dom";
 
 // user authentication functions
-import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../Firebase";
+import {
+  auth,
+  registerWithEmailAndPassword,
+  signInWithGoogle,
+} from "../Firebase";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 
-const Login = () => {
+const Register = () => {
   const navigate = useNavigate();
 
   // states for input animation
+  const [showName, setShowName] = useState(true);
   const [showEmail, setShowEmail] = useState(true);
   const [showPass, setShowPass] = useState(true);
 
-  // states for email and password values
+  // states for name email and password values
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -36,7 +42,7 @@ const Login = () => {
       // if user is logged in, go to dashboard
       navigate("/");
     }
-  }, [user, loading]);
+  });
 
   return (
     <div className="login-container">
@@ -44,6 +50,28 @@ const Login = () => {
         <div className="login-header-container">
           <h1 className="login-header">Welcome</h1>
         </div>
+
+        <div className="input">
+          <input
+            type="text"
+            placeholder="Name"
+            required
+            onFocus={() => {
+              setShowName(false);
+            }}
+            onBlur={() => {
+              setShowName(true);
+            }}
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+          />
+          <span>
+            <FaUser className={showName ? "icon" : "disabled"} />
+          </span>
+        </div>
+
         <div className="input">
           <input
             type="email"
@@ -87,9 +115,9 @@ const Login = () => {
         </div>
         <button
           className="btn-transition1 sign-in-btn"
-          onClick={() => logInWithEmailAndPassword(email, password)}
+          onClick={() => registerWithEmailAndPassword(email, password)}
         >
-          <span className="text">Sign in</span>
+          <span className="text">Register</span>
         </button>
         <p className="separator">
           <span>OR</span>
@@ -100,8 +128,8 @@ const Login = () => {
 
         <div className="other-options-container">
           <div>
-            <span>New user? </span>
-            <Link to="/register">Sign up here</Link>
+            <span>Already a user? </span>
+            <Link to="/login">Sign in here</Link>
           </div>
           <Link to="/reset">Forgot Password</Link>
         </div>
@@ -110,4 +138,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

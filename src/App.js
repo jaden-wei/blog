@@ -3,21 +3,17 @@ import "./App.scss";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Create from "./pages/Create";
-import { useState } from "react";
-import BlogList from "./pages/BlogList";
+import Dashboard from "./pages/Dashboard";
+import Register from "./pages/Register";
 
 function App() {
-  const [isAuth, setIsAuth] = useState(false);
-
   return (
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/" element={<BlogList isAuth={isAuth} />} />
-          <Route
-            path="/login"
-            element={<Login isAuth={isAuth} setIsAuth={setIsAuth} />}
-          />
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/create" element={<Create />} />
         </Routes>
       </Router>
