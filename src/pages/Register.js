@@ -35,6 +35,8 @@ const Register = () => {
   const register = () => {
     if (!name) alert("Please enter your name");
     if (!email) alert("Please enter an email");
+    console.log(name + " registered");
+
     registerWithEmailAndPassword(name, email, password);
   };
 

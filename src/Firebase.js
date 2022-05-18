@@ -72,6 +72,7 @@ const logInWithEmailAndPassword = async (email, password) => {
 // register (create new user) with email and password
 const registerWithEmailAndPassword = async (name, email, password) => {
   try {
+    console.log("registering " + name + email + password);
     // create a record for the user
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
