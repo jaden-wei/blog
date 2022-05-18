@@ -32,6 +32,12 @@ const Register = () => {
   // user authentication state
   const [user, loading, error] = useAuthState(auth);
 
+  const register = () => {
+    if (!name) alert("Please enter your name");
+    if (!email) alert("Please enter an email");
+    registerWithEmailAndPassword(name, email, password);
+  };
+
   useEffect(() => {
     if (loading) {
       // if user is still loading
@@ -117,10 +123,7 @@ const Register = () => {
             <FaLock className={showPass ? "icon" : "disabled"} />
           </span>
         </div>
-        <button
-          className="register-btn"
-          onClick={() => registerWithEmailAndPassword(email, password)}
-        >
+        <button className="register-btn" onClick={register}>
           <span className="text">Register</span>
         </button>
         <p className="separator">
