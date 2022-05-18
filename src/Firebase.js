@@ -42,10 +42,10 @@ const signInWithGoogle = async () => {
     const user = res.user;
     // try to find user in database
     const q = query(collection(db, "users"), where("uid", "==", user.uid));
-    const docs = await getDocs(q);
+    const doc = await getDocs(q);
 
     // if the user doesn't exist, we will make a new one and save that to our database
-    if (docs.docs.lenght === 0) {
+    if (doc.docs.length === 0) {
       await addDoc(collection(db, "users"), {
         uid: user.uid,
         name: user.displayName,

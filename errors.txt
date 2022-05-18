@@ -1,7 +1,2 @@
 CURRENT ERRORS
 
-1. when no user is logged in an error comes up
-  - error message: "Fucntion where() called with invalid data. Unsupported field value: undefined"
-
-2. when logging in with google
-  - error message: "doc.docs[0] is undefined" 
