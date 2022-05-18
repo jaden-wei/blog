@@ -4,4 +4,4 @@ CURRENT ERRORS
   - error message: "Fucntion where() called with invalid data. Unsupported field value: undefined"
 
 2. when logging in with google
-  - error message: "doc.docs[0] is undefined"
+  - error message: "doc.docs[0] is undefined" 
