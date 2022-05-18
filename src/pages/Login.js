@@ -24,29 +24,6 @@ const Login = ({ isAuth, setIsAuth }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // sign in with email and password
-  const signIn = () => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        localStorage.setItem("isAuth", true);
-        setIsAuth(true);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.errorMessage;
-      });
-  };
-
-  // firebase google sign in
-  const signInWithGoogle = () => {
-    signInWithPopup(auth, provider).then((result) => {
-      localStorage.setItem("isAuth", true);
-      setIsAuth(true);
-      navigate("/");
-    });
-  };
-
   return (
     <div className="login-container">
       <h1 className="login-header">Sign in</h1>
