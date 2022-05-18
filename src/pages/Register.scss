@@ -1,4 +1,4 @@
-.login-container {
+.main-container {
   position: relative;
   width: 100vw;
   height: 100vh;
@@ -8,13 +8,13 @@
   justify-content: center;
 }
 
-.login-header-container {
+.header-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.login-form {
+.main-form {
   min-width: 300px;
   padding: 10vh 15vw;
   background-color: white;
@@ -60,7 +60,7 @@
   }
 }
 
-.sign-in-btn {
+.register-btn {
   width: 100%;
   background-color: #8c86f8;
   color: #ffffff;

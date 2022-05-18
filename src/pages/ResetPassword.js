@@ -1,27 +1,24 @@
 import React, { useEffect, useState } from "react";
-import "./Login.scss";
+import "./ResetPassword.scss";
 
 // icons
-import { FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // user authentication functions
-import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../Firebase";
+import { auth, sendPasswordReset } from "../Firebase";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 
-const Login = () => {
+const ResetPassword = () => {
   const navigate = useNavigate();
 
   // states for input animation
   const [showEmail, setShowEmail] = useState(true);
-  const [showPass, setShowPass] = useState(true);
 
   // states for email and password values
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   // user authentication state
   const [user, loading, error] = useAuthState(auth);
@@ -46,7 +43,7 @@ const Login = () => {
     <div className="main-container">
       <div className="main-form">
         <div className="header-container">
-          <h1 className="header">Welcome</h1>
+          <h1 className="header">Email to Reset Password</h1>
         </div>
         <div className="input">
           <input
@@ -69,49 +66,15 @@ const Login = () => {
           </span>
         </div>
 
-        <div className="input">
-          <input
-            type="password"
-            placeholder="Password"
-            required
-            onFocus={() => {
-              setShowPass(false);
-            }}
-            onBlur={() => {
-              setShowPass(true);
-            }}
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
-          <span>
-            <FaLock className={showPass ? "icon" : "disabled"} />
-          </span>
-        </div>
         <button
-          className="sign-in-btn"
-          onClick={() => logInWithEmailAndPassword(email, password)}
+          className="btn-transition1 send-btn"
+          onClick={() => sendPasswordReset(email)}
         >
-          <span className="text">Sign in</span>
+          <span className="text">Send</span>
         </button>
-        <p className="separator">
-          <span>OR</span>
-        </p>
-        <button className="login-with-google-btn" onClick={signInWithGoogle}>
-          Sign in with Google
-        </button>
-
-        <div className="other-options-container">
-          <div>
-            <span>New user? </span>
-            <Link to="/register">Sign up here</Link>
-          </div>
-          <Link to="/reset">Forgot Password</Link>
-        </div>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default ResetPassword;
