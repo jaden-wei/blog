@@ -4,7 +4,14 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 
 import { auth, db, logout } from "../Firebase";
-import { query, collection, getDocs, where } from "firebase/firestore";
+import {
+  query,
+  collection,
+  getDocs,
+  where,
+  orderBy,
+  onSnapshot,
+} from "firebase/firestore";
 
 const Dashboard = () => {
   const [user, loading, error] = useAuthState(auth);
@@ -29,6 +36,22 @@ const Dashboard = () => {
     fetchName();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, loading, error]);
+
+  // list of blogs
+  const [blogs, setBlogs] = useState([]);
+
+  // fetch all blogs in the begining
+  useEffect(() => {
+    const q = query(collection(db, "blogs"), orderBy("created", "body"));
+    onSnapshot(q, (querySnapshot) => {
+      setBlogs(
+        querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          data: doc.data(),
+        }))
+      );
+    });
+  }, []);
 
   return (
     <div>

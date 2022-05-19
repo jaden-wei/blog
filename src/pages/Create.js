@@ -1,7 +1,6 @@
-import React, { useRef } from "react";
-import { Editor, EditorState } from "draft-js";
+import React, { useRef, useState } from "react";
+import { Editor, EditorState, convertToRaw } from "draft-js";
 import "draft-js/dist/Draft.css";
-
 import "./Create.scss";
 
 import Toolbar from "../components/Toolbar";
@@ -9,6 +8,9 @@ import { RichUtils } from "draft-js";
 import { Modifier } from "draft-js";
 import getDefaultKeyBinding from "draft-js/lib/getDefaultKeyBinding";
 // import { Modifier } from "draft-js";
+
+import { db } from "../Firebase";
+import { collection, addDoc, Timestamp } from "firebase/firestore";
 
 const styleMap = {
   CODE: {
@@ -25,6 +27,7 @@ const styleMap = {
 };
 
 export default function Create() {
+  const [title, setTitle] = useState("");
   const [editorState, setEditorState] = React.useState(() =>
     EditorState.createEmpty()
   );
@@ -66,11 +69,33 @@ export default function Create() {
     setEditorState(RichUtils.handleKeyCommand(editorState, command));
   };
 
+  const addBlog = async (e) => {
+    console.log("button clicked");
+    e.preventDefault();
+    try {
+      await addDoc(collection(db, "blogs"), {
+        title,
+        body: JSON.stringify(convertToRaw(editorState.getCurrentContent())),
+        created: Timestamp.now(),
+      });
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+  };
+
   return (
     <div className="create-page-container">
       <div className="form-container">
         <h1 className="create-header">Create Post</h1>
-        <input className="title-input" placeholder="Title..." />
+        <input
+          className="title-input"
+          placeholder="Title..."
+          value={title}
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
+        />
         <div className="editor" onClick={focusEditor}>
           <Toolbar editorState={editorState} setEditorState={setEditorState} />
           <Editor
@@ -84,7 +109,7 @@ export default function Create() {
             handlePastedText={handlePastedText}
           />
         </div>
-        <button className="submit-btn">
+        <button className="submit-btn" onClick={addBlog}>
           <span className="text">Submit</span>
         </button>
       </div>
