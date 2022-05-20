@@ -2,7 +2,7 @@ import "./App.scss";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/Auth/Login";
-import Create from "./pages/NewBlog";
+import Create from "./pages/BlogEditor";
 import Dashboard from "./pages/Dashboard";
 import Register from "./pages/Auth/Register";
 import ResetPassword from "./pages/Auth/ResetPassword";

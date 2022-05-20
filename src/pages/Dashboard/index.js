@@ -25,6 +25,7 @@ const Dashboard = () => {
   //   }
   // };
 
+  // fetch all blogs sorted by timestamp
   const fetchBlogs = async () => {
     try {
       const q = query(collection(db, "blogs"), orderBy("created"));
@@ -45,6 +46,7 @@ const Dashboard = () => {
     }
   };
 
+  // load our page once we find a user
   useEffect(() => {
     if (loading) return;
     if (!user) return navigate("/login");
@@ -54,13 +56,15 @@ const Dashboard = () => {
 
   return (
     <div>
+      {
+        //dispaly all blogs
+      }
       <div>
         {blogs.map((blog) => {
           console.log(blog);
           return <Blog key={blog.id} data={blog.data} />;
         })}
       </div>
-
       <button onClick={logout}>Logout</button>
     </div>
   );

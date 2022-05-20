@@ -33,6 +33,7 @@ const Blog = ({ data }) => {
   return (
     <div>
       <h1>{data.title}</h1>
+      <h3>{data.author}</h3>
       <Editor editorState={editorState} readOnly customStyleMap={styleMap} />
     </div>
   );
