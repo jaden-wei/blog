@@ -1,30 +1,44 @@
 import React, { useEffect, useState } from "react";
-import "./Login.scss";
+import "./style.scss";
 
 // icons
-import { FaLock } from "react-icons/fa";
+import { FaLock, FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
 import { Link, useNavigate } from "react-router-dom";
 
 // user authentication functions
-import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../Firebase";
+import {
+  auth,
+  registerWithEmailAndPassword,
+  signInWithGoogle,
+} from "../../../Firebase";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 
-const Login = () => {
+const Register = () => {
   const navigate = useNavigate();
 
   // states for input animation
+  const [showName, setShowName] = useState(true);
   const [showEmail, setShowEmail] = useState(true);
   const [showPass, setShowPass] = useState(true);
 
-  // states for email and password values
+  // states for name email and password values
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   // user authentication state
   const [user, loading, error] = useAuthState(auth);
+
+  const register = () => {
+    if (!name) alert("Please enter your name");
+    if (!email) alert("Please enter an email");
+    console.log(name + " registered");
+
+    registerWithEmailAndPassword(name, email, password);
+  };
 
   useEffect(() => {
     if (loading) {
@@ -48,6 +62,28 @@ const Login = () => {
         <div className="header-container">
           <h1 className="header">Welcome</h1>
         </div>
+
+        <div className="input">
+          <input
+            type="text"
+            placeholder="Name"
+            required
+            onFocus={() => {
+              setShowName(false);
+            }}
+            onBlur={() => {
+              setShowName(true);
+            }}
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+          />
+          <span>
+            <FaUser className={showName ? "icon" : "disabled"} />
+          </span>
+        </div>
+
         <div className="input">
           <input
             type="email"
@@ -89,11 +125,8 @@ const Login = () => {
             <FaLock className={showPass ? "icon" : "disabled"} />
           </span>
         </div>
-        <button
-          className="sign-in-btn"
-          onClick={() => logInWithEmailAndPassword(email, password)}
-        >
-          <span className="text">Sign in</span>
+        <button className="register-btn" onClick={register}>
+          <span className="text">Register</span>
         </button>
         <p className="separator">
           <span>OR</span>
@@ -104,8 +137,8 @@ const Login = () => {
 
         <div className="other-options-container">
           <div>
-            <span>New user? </span>
-            <Link to="/register">Sign up here</Link>
+            <span>Already a user? </span>
+            <Link to="/login">Sign in here</Link>
           </div>
           <Link to="/reset">Forgot Password</Link>
         </div>
@@ -114,4 +147,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

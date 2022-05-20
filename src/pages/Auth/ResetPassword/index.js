@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./ResetPassword.scss";
+import "./style.scss";
 
 // icons
 import { MdEmail } from "react-icons/md";
@@ -7,7 +7,7 @@ import { MdEmail } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 // user authentication functions
-import { auth, sendPasswordReset } from "../Firebase";
+import { auth, sendPasswordReset } from "../../../Firebase";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 

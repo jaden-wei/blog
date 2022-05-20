@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "./Register.scss";
+import "./style.scss";
 
 // icons
-import { FaLock, FaUser } from "react-icons/fa";
+import { FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
 import { Link, useNavigate } from "react-router-dom";
@@ -10,35 +10,25 @@ import { Link, useNavigate } from "react-router-dom";
 // user authentication functions
 import {
   auth,
-  registerWithEmailAndPassword,
+  logInWithEmailAndPassword,
   signInWithGoogle,
-} from "../Firebase";
+} from "../../../Firebase";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 
-const Register = () => {
+const Login = () => {
   const navigate = useNavigate();
 
   // states for input animation
-  const [showName, setShowName] = useState(true);
   const [showEmail, setShowEmail] = useState(true);
   const [showPass, setShowPass] = useState(true);
 
-  // states for name email and password values
-  const [name, setName] = useState("");
+  // states for email and password values
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   // user authentication state
   const [user, loading, error] = useAuthState(auth);
-
-  const register = () => {
-    if (!name) alert("Please enter your name");
-    if (!email) alert("Please enter an email");
-    console.log(name + " registered");
-
-    registerWithEmailAndPassword(name, email, password);
-  };
 
   useEffect(() => {
     if (loading) {
@@ -62,28 +52,6 @@ const Register = () => {
         <div className="header-container">
           <h1 className="header">Welcome</h1>
         </div>
-
-        <div className="input">
-          <input
-            type="text"
-            placeholder="Name"
-            required
-            onFocus={() => {
-              setShowName(false);
-            }}
-            onBlur={() => {
-              setShowName(true);
-            }}
-            value={name}
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-          />
-          <span>
-            <FaUser className={showName ? "icon" : "disabled"} />
-          </span>
-        </div>
-
         <div className="input">
           <input
             type="email"
@@ -125,8 +93,11 @@ const Register = () => {
             <FaLock className={showPass ? "icon" : "disabled"} />
           </span>
         </div>
-        <button className="register-btn" onClick={register}>
-          <span className="text">Register</span>
+        <button
+          className="sign-in-btn"
+          onClick={() => logInWithEmailAndPassword(email, password)}
+        >
+          <span className="text">Sign in</span>
         </button>
         <p className="separator">
           <span>OR</span>
@@ -137,8 +108,8 @@ const Register = () => {
 
         <div className="other-options-container">
           <div>
-            <span>Already a user? </span>
-            <Link to="/login">Sign in here</Link>
+            <span>New user? </span>
+            <Link to="/register">Sign up here</Link>
           </div>
           <Link to="/reset">Forgot Password</Link>
         </div>
@@ -147,4 +118,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;

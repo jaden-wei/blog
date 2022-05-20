@@ -1,15 +1,15 @@
 import React, { useRef, useState } from "react";
 import { Editor, EditorState, convertToRaw } from "draft-js";
 import "draft-js/dist/Draft.css";
-import "./Create.scss";
+import "./style.scss";
 
-import Toolbar from "../components/Toolbar";
+import Toolbar from "./Toolbar";
 import { RichUtils } from "draft-js";
 import { Modifier } from "draft-js";
 import getDefaultKeyBinding from "draft-js/lib/getDefaultKeyBinding";
 // import { Modifier } from "draft-js";
 
-import { db } from "../Firebase";
+import { db } from "../../Firebase";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 
 const styleMap = {
