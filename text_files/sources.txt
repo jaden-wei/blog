@@ -3,3 +3,6 @@
 
 2. https://blog.logrocket.com/build-crud-application-react-firebase-web-sdk-v9/
   - setting up CRUD with firestore database
+
+3. https://www.tuomokankaanpaa.com/blog/simple-easy-way-display-draft-js-content
+  - storing and fetching our editor states

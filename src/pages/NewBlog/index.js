@@ -28,7 +28,7 @@ const styleMap = {
 
 export default function Create() {
   const [title, setTitle] = useState("");
-  const [editorState, setEditorState] = React.useState(() =>
+  const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
 
