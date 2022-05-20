@@ -20,7 +20,6 @@ const styleMap = {
     fontFamily: "`Source Code Pro`, monospace",
     display: "block",
     padding: "2px",
-    textIndent: "10px",
 
     whiteSpace: "pre-wrap",
   },

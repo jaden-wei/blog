@@ -2,6 +2,19 @@ import React, { useEffect, useState } from "react";
 
 import { convertFromRaw, Editor, EditorState } from "draft-js";
 
+const styleMap = {
+  CODE: {
+    backgroundColor: "#cfcfcf",
+    fontSize: "12px",
+    fontWeight: "200",
+    fontFamily: "`Source Code Pro`, monospace",
+    display: "block",
+    padding: "10px",
+
+    whiteSpace: "pre-wrap",
+  },
+};
+
 const Blog = ({ data }) => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
@@ -20,7 +33,7 @@ const Blog = ({ data }) => {
   return (
     <div>
       <h1>{data.title}</h1>
-      <Editor editorState={editorState} readOnly />
+      <Editor editorState={editorState} readOnly customStyleMap={styleMap} />
     </div>
   );
 };
