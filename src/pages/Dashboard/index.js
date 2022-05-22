@@ -5,25 +5,14 @@ import { useNavigate } from "react-router-dom";
 
 import { auth, db, logout } from "../../Firebase";
 import { query, collection, orderBy, onSnapshot } from "firebase/firestore";
-import Blog from "./BlogPost";
+
+import BlogList from "./BlogList";
 
 const Dashboard = () => {
   const [user, loading, error] = useAuthState(auth);
   // list of blogs
   const [blogs, setBlogs] = useState([]);
   const navigate = useNavigate();
-
-  // const fetchName = async () => {
-  //   try {
-  //     const q = query(collection(db, "users"), where("uid", "==", user?.uid));
-  //     const doc = await getDocs(q);
-  //     const data = doc.docs[0].data();
-  //     setName(data.name);
-  //   } catch (err) {
-  //     console.error(err);
-  //     alert(err.message);
-  //   }
-  // };
 
   // fetch all blogs sorted by timestamp
   const fetchBlogs = async () => {
@@ -56,16 +45,7 @@ const Dashboard = () => {
 
   return (
     <div>
-      {
-        //dispaly all blogs
-      }
-      <div>
-        {blogs.map((blog) => {
-          console.log(blog);
-          return <Blog key={blog.id} data={blog.data} />;
-        })}
-      </div>
-      <button onClick={logout}>Logout</button>
+      <BlogList blogs={blogs} />
     </div>
   );
 };

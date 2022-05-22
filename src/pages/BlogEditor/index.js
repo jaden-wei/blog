@@ -33,6 +33,8 @@ export default function Create() {
 
   // keep track of our title input
   const [title, setTitle] = useState("");
+  //keep track of our summary
+  const [summary, setSummary] = useState("");
   // keep track of our body input
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
@@ -82,6 +84,7 @@ export default function Create() {
       await addDoc(collection(db, "blogs"), {
         title,
         author: user.displayName,
+        summary,
         body: JSON.stringify(convertToRaw(editorState.getCurrentContent())),
         created: Timestamp.now(),
       });
@@ -111,6 +114,12 @@ export default function Create() {
             setTitle(e.target.value);
           }}
         />
+        <textarea
+          className="summary-input"
+          placeholder="Summarize your post..."
+          value={summary}
+          onChange={(e) => setSummary(e.target.value)}
+        ></textarea>
         <div className="editor" onClick={focusEditor}>
           <Toolbar editorState={editorState} setEditorState={setEditorState} />
           <Editor
