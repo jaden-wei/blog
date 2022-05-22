@@ -9,7 +9,7 @@ import { FiUser } from "react-icons/fi";
 const Sidebar = () => {
   return (
     <div className="sidebar-container">
-      <div className="sidebar-item logo">
+      <div className="logo">
         <span>Jaden's Blog</span>
         <HiOutlineNewspaper className="icon" size={26} />
       </div>

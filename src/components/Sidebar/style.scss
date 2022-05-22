@@ -28,8 +28,24 @@
   span {
     font-size: 17px;
   }
+
+  &:hover {
+    color: gray;
+    cursor: pointer;
+  }
 }
 
 .logo {
   margin: 4em 2em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .icon {
+    padding-left: 15px;
+  }
+
+  span {
+    font-size: 22px;
+  }
 }
