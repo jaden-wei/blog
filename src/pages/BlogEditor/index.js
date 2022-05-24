@@ -134,7 +134,7 @@ export default function Create() {
           />
         </div>
         <button className="submit-btn" onClick={addBlog}>
-          <span className="text">Submit</span>
+          <span className="text">Upload Post</span>
         </button>
       </div>
     </div>

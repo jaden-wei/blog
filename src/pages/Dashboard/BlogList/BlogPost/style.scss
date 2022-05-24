@@ -1,19 +1,23 @@
 .post-container {
-  width: 70%;
   border-bottom: 1px solid rgb(217, 217, 217);
 
   margin: 20px auto;
   padding: 10px;
-}
 
-.title {
-  color: black;
+  display: flex;
+  flex-direction: column;
 
-  font-size: 20px;
-  font-weight: 200;
-}
+  span {
+    margin: 6px 0;
+  }
 
-.author {
-  font-size: 16px;
-  font-weight: 200;
+  .title-container {
+    span {
+      font-size: 22px;
+    }
+  }
+
+  .date {
+    font-size: 14px;
+  }
 }

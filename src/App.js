@@ -7,12 +7,19 @@ import Dashboard from "./pages/Dashboard";
 import Register from "./pages/Auth/Register";
 import ResetPassword from "./pages/Auth/ResetPassword";
 import Sidebar from "./components/Sidebar";
+import { useState } from "react";
 
 function App() {
+  const [page, setPage] = useState("dashboard");
+
+  const displaySidebar = () => {
+    if (page === "dashboard") return <Sidebar setPage={setPage} />;
+  };
+
   return (
     <div className="App">
       <Router>
-        <Sidebar />
+        {displaySidebar()}
         <div className="right-side-container">
           <Routes>
             <Route path="/" element={<Dashboard />} />
