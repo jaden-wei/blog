@@ -4,7 +4,7 @@ import "./style.scss";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 
-import { auth, db, logout } from "../../Firebase";
+import { auth, db } from "../../Firebase";
 import { query, collection, orderBy, onSnapshot } from "firebase/firestore";
 
 import BlogList from "./BlogList";

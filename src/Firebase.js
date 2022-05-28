@@ -1,5 +1,7 @@
 import { initializeApp } from "firebase/app";
 
+import { firebaseConfig } from "./Config";
+
 import {
   GoogleAuthProvider,
   getAuth,
@@ -18,16 +20,6 @@ import {
   where,
   addDoc,
 } from "firebase/firestore";
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyBYXqQcxS9zT0npZFjg_xqUMHcy4JEgpTw",
-  authDomain: "blog-81191.firebaseapp.com",
-  projectId: "blog-81191",
-  storageBucket: "blog-81191.appspot.com",
-  messagingSenderId: "923824322783",
-  appId: "1:923824322783:web:e345b42608fe298e95916a",
-};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

@@ -60,10 +60,13 @@ const Blog = ({ data, search }) => {
   ) {
     return (
       <div className="post-container">
+        <div className="author-container">
+          <img className="profile-photo" src={data.photo} alt="" />
+          <Highlight text={cap(data.author)} highlight={search} />
+        </div>
         <div className="title-container">
           <Highlight text={data.title} highlight={search} />
         </div>
-        <Highlight text={cap(data.author)} highlight={search} />
         <Highlight text={data.summary} highlight={search} />
         <p className="date">{timeConverter(data.created.seconds)}</p>
       </div>

@@ -49,7 +49,6 @@ export default function Create() {
   }
 
   const handlePastedText = (text, html) => {
-    console.log("handlePastedText executed");
     const newState = Modifier.replaceText(
       editorState.getCurrentContent(),
       editorState.getSelection(),
@@ -79,11 +78,11 @@ export default function Create() {
   const addBlog = async (e) => {
     e.preventDefault();
     if (!user) return navigate("/");
-    console.log(auth.currentUser);
     try {
       await addDoc(collection(db, "blogs"), {
         title,
         author: user.displayName,
+        photo: user.photoURL,
         summary,
         body: JSON.stringify(convertToRaw(editorState.getCurrentContent())),
         created: Timestamp.now(),
