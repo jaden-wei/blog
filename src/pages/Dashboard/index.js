@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./style.scss";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +8,7 @@ import { auth, db, logout } from "../../Firebase";
 import { query, collection, orderBy, onSnapshot } from "firebase/firestore";
 
 import BlogList from "./BlogList";
+import Sidebar from "../../components/Sidebar";
 
 const Dashboard = () => {
   const [user, loading, error] = useAuthState(auth);
@@ -19,7 +21,6 @@ const Dashboard = () => {
     try {
       const q = query(collection(db, "blogs"), orderBy("created"));
       await onSnapshot(q, (querySnapshot) => {
-        console.log(querySnapshot.docs);
         setBlogs(
           querySnapshot.docs.map((doc) => ({
             id: doc.id,
@@ -27,8 +28,6 @@ const Dashboard = () => {
           }))
         );
       });
-
-      console.log(blogs);
     } catch (err) {
       console.error(err);
       alert(err.message);
@@ -44,8 +43,11 @@ const Dashboard = () => {
   }, [user, loading, error]);
 
   return (
-    <div>
-      <BlogList blogs={blogs} />
+    <div className="dashboard-container">
+      <Sidebar />
+      <div className="right-side-container">
+        <BlogList blogs={blogs} />
+      </div>
     </div>
   );
 };
