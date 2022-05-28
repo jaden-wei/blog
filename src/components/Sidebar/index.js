@@ -6,7 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { HiOutlineNewspaper } from "react-icons/hi";
 import { AiOutlineHome, AiOutlineInfoCircle } from "react-icons/ai";
 import { IoCreateOutline, IoNotificationsOutline } from "react-icons/io5";
-import { FiUser } from "react-icons/fi";
+import { FiUser, FiLogOut } from "react-icons/fi";
+import { logout } from "../../Firebase";
 
 const Sidebar = ({}) => {
   const navigate = useNavigate();
@@ -62,6 +63,10 @@ const Sidebar = ({}) => {
             navigate("/create");
           }}
         />
+      </div>
+      <div className="signout-button">
+        <span>Sign Out</span>
+        <FiLogOut className="icon" size={16} onClick={logout} />
       </div>
     </div>
   );

@@ -49,3 +49,26 @@
     font-size: 22px;
   }
 }
+
+.signout-button {
+  margin: 15px 2em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  position: fixed;
+  bottom: 40px;
+
+  .icon {
+    padding-left: 15px;
+  }
+
+  span {
+    font-size: 13px;
+  }
+
+  &:hover {
+    color: gray;
+    cursor: pointer;
+  }
+}
