@@ -2,7 +2,7 @@ import React from "react";
 
 import { RichUtils } from "draft-js";
 
-import "./Toolbar.scss";
+import "./style.scss";
 
 import {
   MdFormatBold,

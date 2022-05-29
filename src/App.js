@@ -6,6 +6,7 @@ import Create from "./pages/BlogEditor";
 import Dashboard from "./pages/Dashboard";
 import Register from "./pages/Auth/Register";
 import ResetPassword from "./pages/Auth/ResetPassword";
+import BlogPost from "./pages/BlogPost";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/create" element={<Create />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/post/:id" element={<BlogPost />} />
         </Routes>
       </Router>
     </div>

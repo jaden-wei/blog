@@ -1,23 +1,10 @@
 import "./style.scss";
 
 import Highlight from "../../../../components/Highlight";
+import { useNavigate } from "react-router-dom";
 
-const Blog = ({ data, search }) => {
-  // const [editorState, setEditorState] = useState(() =>
-  //   EditorState.createEmpty()
-  // );
-
-  // // convert our stored editor state to an editor state we can use
-  // const parseBody = () => {
-  //   const contentState = convertFromRaw(JSON.parse(data.body));
-  //   setEditorState(() => EditorState.createWithContent(contentState));
-  // };
-
-  // useEffect(() => {
-  //   console.log(data.created.seconds);
-  //   parseBody();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+const BlogSummary = ({ id, data, search }) => {
+  const navigate = useNavigate();
 
   // capitalize a string
   const cap = (str) => {
@@ -52,6 +39,10 @@ const Blog = ({ data, search }) => {
     return time;
   }
 
+  const openBlog = () => {
+    navigate(`/post/${id}`, { state: { data: data } });
+  };
+
   if (
     search === "" ||
     data.title.toLowerCase().includes(search.toLowerCase()) ||
@@ -59,7 +50,7 @@ const Blog = ({ data, search }) => {
     data.summary.toLowerCase().includes(search.toLowerCase())
   ) {
     return (
-      <div className="post-container">
+      <div className="post-container" onClick={openBlog}>
         <div className="author-container">
           <img className="profile-photo" src={data.photo} alt="" />
           <Highlight text={cap(data.author)} highlight={search} />
@@ -74,4 +65,4 @@ const Blog = ({ data, search }) => {
   } else return <></>;
 };
 
-export default Blog;
+export default BlogSummary;

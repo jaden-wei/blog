@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./style.scss";
 
-import Blog from "./BlogPost";
+import BlogSummary from "./BlogSummary";
 
 const BlogList = ({ blogs }) => {
   const [search, setSearch] = useState("");
@@ -19,7 +19,14 @@ const BlogList = ({ blogs }) => {
         .slice(0)
         .reverse()
         .map((blog) => {
-          return <Blog key={blog.id} data={blog.data} search={search} />;
+          return (
+            <BlogSummary
+              key={blog.id}
+              id={blog.id}
+              data={blog.data}
+              search={search}
+            />
+          );
         })}
     </div>
   );

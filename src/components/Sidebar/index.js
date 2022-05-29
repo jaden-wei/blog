@@ -9,7 +9,7 @@ import { IoCreateOutline, IoNotificationsOutline } from "react-icons/io5";
 import { FiUser, FiLogOut } from "react-icons/fi";
 import { logout } from "../../Firebase";
 
-const Sidebar = ({}) => {
+const Sidebar = () => {
   const navigate = useNavigate();
 
   return (
