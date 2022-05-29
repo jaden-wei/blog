@@ -1,8 +1,0 @@
-1. https://blog.logrocket.com/user-authentication-firebase-react-apps/
-  - setting up user authentication (google and email/password) with Firebase and React
-
-2. https://blog.logrocket.com/build-crud-application-react-firebase-web-sdk-v9/
-  - setting up CRUD with firestore database
-
-3. https://www.tuomokankaanpaa.com/blog/simple-easy-way-display-draft-js-content
-  - storing and fetching our editor states
